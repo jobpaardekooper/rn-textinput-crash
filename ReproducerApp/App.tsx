@@ -5,7 +5,7 @@
  * @format
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
@@ -13,6 +13,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  TextInput,
   useColorScheme,
   View,
 } from 'react-native';
@@ -56,6 +57,7 @@ function Section({children, title}: SectionProps): React.JSX.Element {
 }
 
 function App(): React.JSX.Element {
+  const [text, setText] = useState('');
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -72,6 +74,12 @@ function App(): React.JSX.Element {
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
         <Header />
+        <TextInput
+          style={ styles.inputStyle }
+          placeholder="Type some text here to crash :)"
+          value={ text }
+          onChangeText={ setText }
+        />
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
@@ -112,6 +120,11 @@ const styles = StyleSheet.create({
   },
   highlight: {
     fontWeight: '700',
+  },
+  inputStyle: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
   },
 });
 
